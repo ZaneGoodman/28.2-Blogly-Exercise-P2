@@ -3,7 +3,7 @@
 
 {% block content %}
 <h1>Edit A User</h1>
-<form action="/user-details/{{user.id}}/edit" method="POST">
+<form action="/user-details/{{user.id}}/edit" method="POST" class="edit-form">
     <label for='first_name'>First Name</label>
     <input type="text" name="first_name" placeholder="{{user.first_name}}">
 
@@ -12,9 +12,10 @@
 
     <label for="img_url">Image URL</label>
     <input type="url" name="img_url" placeholder="{{user.img_url}}">
-    <br>
+
     <button class='btn btn-primary'>Edit</button>
+    <a href="/" class='btn btn-primary'>Cancel</a>
 </form>
 
-<a href="/" class='btn btn-primary'>Cancel</a>
+
 {% endblock %}
