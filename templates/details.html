@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}User Details{% endblock %}
+
+{% block content%}
+<h1>{{user.first_name}} {{user.last_name}}</h1>
+
+<img src="{{user.img_url}}" class="img">
+
+<a href="/user-details/{{user.id}}/edit" class='btn btn-primary'>Edit</a>
+
+<a href="/user-details/{{user.id}}/delete" class='btn btn-primary'>Delete</a>
+
+<a href="/" class='btn btn-primary'>Go Home</a>
+{% endblock %}
