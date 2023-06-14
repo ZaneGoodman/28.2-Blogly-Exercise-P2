@@ -38,14 +38,18 @@ class UserTestCase(TestCase):
         db.session.rollback()
 
     def test_user_details(self):
+        """Check that Porper user info is displayed on details page"""
         with app.test_client() as client:
             resp = client.get(f"/user-details/{self.user_id}")
             html = resp.get_data(as_text=True)
 
             self.assertEqual(resp.status_code, 200)
-            self.assertIn("<h1>Lacey grace</h1>", html)
+            self.assertIn(
+                '<h1 id="details-name" class="form-group">Lacey grace</h1>', html
+            )
 
     def test_edit_user(self):
+        """Test route that takes user to an editing form"""
         with app.test_client() as client:
             resp = client.get(f"/user-details/{self.user_id}/edit")
             html = resp.get_data(as_text=True)
@@ -54,6 +58,7 @@ class UserTestCase(TestCase):
             self.assertIn("<label for='first_name'>First Name</label>", html)
 
     def test_user_edit_form(self):
+        """Check if new information passed into user-edit form is properly added to the db and displayed on the updated user details page"""
         with app.test_client() as client:
             data = {
                 "first_name": "Sally",
@@ -66,12 +71,17 @@ class UserTestCase(TestCase):
             html = resp.get_data(as_text=True)
 
             self.assertEqual(resp.status_code, 200)
-            self.assertIn("<h1>Sally brooks</h1>", html)
+            self.assertIn(
+                '<h1 id="details-name" class="form-group">Sally brooks</h1>', html
+            )
 
     def test_delete_user(self):
+        """Check if deletion is successful"""
         with app.test_client() as client:
-            resp = client.get(f"/user-details/{self.user_id}/delete")
+            resp = client.get(
+                f"/user-details/{self.user_id}/delete", follow_redirects=True
+            )
             html = resp.get_data(as_text=True)
 
-            self.assertEqual(resp.status_code, 302)
+            self.assertEqual(resp.status_code, 200)
             self.assertNotIn("Lacey", html)

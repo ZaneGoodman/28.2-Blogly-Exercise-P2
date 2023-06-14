@@ -2,13 +2,14 @@
 {% block title %}Post{% endblock %}
 
 {% block content %}
-<h1>{{post.title}}</h1>
 
-<p>{{post.content}}</p>
+<h1 class="form-group">{{post.title}}</h1>
 
-<blockquote>By {{post.user.first_name}} {{post.user.last_name}}</blockquote>
+<p class="form-group">{{post.content}}</p>
 
-<a href="/user-details/{{post.user.id}}" class='btn btn-primary'>Cancel</a>
-<a href="/user-details/{{post.user.id}}/{{post.id}}/edit-post" class='btn btn-primary'>Edit</a>
-<a href="/user-details/{{user.id}}/{{post.id}}/delete-post" class='btn btn-primary'>Delete</a>
+<blockquote class="form-group">By {{post.user.first_name}} {{post.user.last_name}}</blockquote>
+
+<a href="/user-details/{{post.user.id}}" class='btn btn-outline-primary form-group'>Back</a>
+<a href="/user-details/{{post.user.id}}/{{post.id}}/edit-post" class='btn btn-primary form-group'>Edit</a>
+<a href="/user-details/{{user.id}}/{{post.id}}/delete-post" class="btn btn-danger form-group">Delete</a>
 {% endblock %}

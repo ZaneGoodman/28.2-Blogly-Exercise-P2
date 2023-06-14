@@ -21,6 +21,7 @@ debug = DebugToolbarExtension(app)
 connect_db(app)
 
 
+# routes for user table
 @app.route("/")
 def user_list():
     """List users"""
@@ -84,6 +85,9 @@ def delete_user(user_id):
     db.session.delete(user)
     db.session.commit()
     return redirect("/")
+
+
+# Routes for Post table
 
 
 @app.route("/user-details/<int:user_id>/add-post")

@@ -2,30 +2,31 @@
 {% block title %}User Details{% endblock %}
 
 {% block content%}
-{% if user.img_url != '' %}
-<img src="{{user.img_url}}" class="img">
-{% else %}
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/340px-Default_pfp.svg.png?20220226140232"
-    class="img">
-{% endif %}
-
 <section class="details">
-    <h1 id="details-name">{{user.first_name}} {{user.last_name}}</h1>
+    {% if user.img_url != '' %}
+    <img src="{{user.img_url}}" class="img form-group">
+    {% else %}
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/340px-Default_pfp.svg.png?20220226140232"
+        class="img form-group">
+    {% endif %}
 
-    <a href="/user-details/{{user.id}}/edit" class='btn btn-primary'>Edit</a>
 
-    <a href="/user-details/{{user.id}}/delete" class='btn btn-primary'>Delete</a>
+    <h1 id="details-name" class="form-group">{{user.first_name}} {{user.last_name}}</h1>
+
+    <a href="/user-details/{{user.id}}/edit" class='btn btn-primary form-group'>Edit</a>
+
+    <a href="/user-details/{{user.id}}/delete" class="btn btn-danger form-group">Delete</a>
 
     <a href="/" class='btn btn-primary'>Go Home</a>
 </section>
 
 <section class="posts">
-    <h2>Post</h2>
-    <ul>
+    <h2 class="form-group">Post</h2>
+    <div class="form-group list-group col-sm-3 form-group">
         {% for p in post %}
-        <li><a href="/user-details/{{user.id}}/{{p.id}}">{{p.title}}</a></li>
+        <a href="/user-details/{{user.id}}/{{p.id}}" class="list-group-item list-group-item-action">{{p.title}}</a>
         {% endfor %}
-    </ul>
-    <a href="/user-details/{{user.id}}/add-post" class='btn btn-primary'>Add Post</a>
+    </div>
+    <a href="/user-details/{{user.id}}/add-post" class="btn btn-success form-group">Add Post</a>
 </section>
 {% endblock %}
